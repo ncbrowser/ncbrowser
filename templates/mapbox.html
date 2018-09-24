@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Sample NetCDF4 Plot
+{% endblock %}
+
+
+{% block content %}
+
+    <div>
+        <h4>Plotting variable "{{ plotter.plotted_var }}" from dataset "{{ filename }}" at {{ plotter.fixed_dim }} = {{ plotter.fixed_level }}</h4>
+    </div>
+    <div>
+        {{ plot }}
+    </div>
+
+{% endblock %}
+
+{% block sidebar %}
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Plot Settings
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+          <div id="plotsettings">
+                <p>North axis
+                    <select id="northaxis">
+                        {% for varname in ncp.dataframe.index.names %}
+                            <option value="{{ varname }}">{{ varname }}</option>
+                        {% endfor %}
+                    </select>
+                </p>
+                <p>East axis
+                    <select id="eastaxis">
+                        {% for varname in ncp.dataframe.index.names %}
+                            <option value="{{ varname }}">{{ varname }}</option>
+                        {% endfor %}
+                    </select>
+                </p>
+                <p>Fixed dimension
+                    <select id="fixeddimension">
+                        {% for varname in ncp.dataframe.index.names %}
+                            <option value="{{ varname }}">{{ varname }}</option>
+                        {% endfor %}
+                    </select>
+                </p>
+                <p>Fixed level
+                    <select id="fixedlevel">
+                    {% for val in ncp.get_xarr_values(plotter.fixed_dim) %}
+                        <option value="{{ val }}">{{ val }}</option>
+                    {% endfor %}
+                    </select>
+                </p>
+           </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          CRS Settings
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="epsgcode">Select EPSG CRS</label>
+                <select id="epsgcode">
+                    <option value="none">No EPSG Code / Custom CRS</option>
+                    <option value="1234">1234</option>
+                    <option value="35171">35171</option>
+                    <option value="54123">54123</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="translatenorth">Translation</label>
+                <input type="text" class="form-control" id="translatenorth" aria-describedby="translatehelp" placeholder="North translation in degrees">
+                <input type="text" class="form-control" id="translateeast" aria-describedby="translatehelp" placeholder="East translation in degrees">
+                <small id="translatehelp" class="form-text text-muted">Please use Web Mercator Coordinates</small>
+              </div>
+              <div class="form-group">
+                <label for="rotatenorth">Rotation</label>
+                <input type="text" class="form-control" id="rotatenorth" placeholder="Rotation to north pole in Degrees">
+              </div>
+                <div class="form-group">
+                <label for="scale">Scale</label>
+                <input type="text" class="form-control" id="scale" placeholder="Scale factor">
+              </div>
+              </div>
+                <div class="form-group">
+                <label for="shear">Shear</label>
+                <input type="text" class="form-control" id="shear" placeholder="Shear">
+              </div>
+              <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<button type="button" class="btn btn-info btn-fullwidth"><i class="material-icons">autorenew</i>Refresh Map</button>
+
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

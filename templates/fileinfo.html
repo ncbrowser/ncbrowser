@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+    NetCDF4 File Info
+{% endblock %}
+
+
+{% block content %}
+    <div>
+        <h4>Dataset "{{ ds_name }}"</h4>
+    </div>
+    <div>
+        {{ df }}
+    </div>
+
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}
+
+
+{% block footer %}
+    {% for var in df.variables %}
+    <h4>{{ var }}:</h4>
+    <p><i>{{ df.index.get_level_values('time') }}</i></p>
+    {% endfor %}
+{% endblock %}

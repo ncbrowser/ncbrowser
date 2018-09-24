@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Upload .nc file
+{% endblock %}
+
+{% block content_heading %}
+    Upload .nc file
+{% endblock %}
+
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        {{ form.hidden_tag() }}
+        {{ form.upload }}
+        <input type="submit">
+    </form>
+{% endblock %}

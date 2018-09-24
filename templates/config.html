@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Set default parameters
+{% endblock %}
+
+{% block content_heading %}
+    Set default parameters
+{% endblock %}
+
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        {{ form.hidden_tag() }}
+        <p>Select East Axis {{ form.east_axis(class_="dim-select") }}</p>
+        <p>Select North Axis {{ form.north_axis(class_="dim-select") }}</p>
+        <p>Select fixed dimension {{ form.fixed_dimension(class_="dim-select") }}</p>
+        <input type="submit" value="Save">
+    </form>
+    <script>
+
+        var previous_east_axis = $('#east_axis').value;
+
+
+
+
+        $(".dim-select").on("focus click",function () {
+            previous_east_axis = this.value; // Old value
+        });
+
+        $(".dim-select").on("change",function () {
+            //alert("this.value=" + this.value +"   previous=" + previous_east_axis);
+            $(".dim-select option[value='"+this.value+"']").not(this).remove();
+
+            if($(".dim-select option:contains('"+previous_east_axis+"')").length ==0){
+                $(".dim-select").not(this).append('<option value="'+previous_east_axis+'">'+previous_east_axis+'</option>');
+            }
+
+        });
+
+    </script>
+{% endblock %}

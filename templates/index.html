@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+    NetCDF4 Web Viewer
+{% endblock %}
+
+
+{% block content %}
+<form method="POST">
+    <select>
+    {%- for file in filelist %}
+        <option value="{{ file }}">{{ file }}</option>
+    {%- endfor %}
+    </select>
+    <input type="submit" value="Plot selected file">
+</form>
+
+{% endblock %}

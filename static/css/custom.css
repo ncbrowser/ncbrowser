@@ -1,0 +1,62 @@
+/* ===================
+    Custom CSS
+   =================== */
+
+
+/***** Main Wrapper  *****/
+#wrapper.toggled {
+    padding-right: 350px;
+    padding-left: unset;
+    padding-top: 50px;
+}
+
+/***** Navbar *****/
+#navbar{
+    position: fixed;
+    height: 40px;
+    width: 100%;
+    z-index: 9999;
+}
+nav a {
+    background-color: transparent;
+}
+
+/***** Sidebar *****/
+#sidebar-wrapper{
+    background-color: #FFF;
+    right: 350px;
+    left: unset;
+    margin-right: -350px;
+    margin-left: unset;
+    margin-top: 30px;
+}
+#sidebar-wrapper .btn-link {
+    font-weight: 400;
+    color: #007bff;
+    background-color: transparent;
+}
+
+#sidebar-wrapper .btn-fullwidth{
+    margin-top: 20px;
+}
+#wrapper.toggled #sidebar-wrapper {
+    width: 350px;
+}
+.btn-fullwidth{
+    width: 100%;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+}
+
+/***** Map *****/
+.map {
+  height: 400px;
+  width: 100%;
+}
+
+/***** Error flashes *****/
+.flashes {
+    color: darkred;
+    font-weight: bold;
+}
